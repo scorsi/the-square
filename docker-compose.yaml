@@ -5,7 +5,8 @@ services:
         container_name: square_database
         restart: always
         volumes:
-            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+            - ./01-init.sql:/docker-entrypoint-initdb.d/01-init.sql
+            - ./02-feed.sql:/docker-entrypoint-initdb.d/02-feed.sql
         environment:
             - POSTGRES_PASSWORD=secret
             - POSTGRES_DB=square
