@@ -1,2 +1,2 @@
 # the-square
-Epitech Datanase Project
+Epitech Database Project
