@@ -1,24 +1,22 @@
 version: '3.1'
 services:
     db:
-        image: mysql:5.6
+        image: postgres
         container_name: square_database
         restart: always
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
-            - MYSQL_ROOT_PASSWORD=secret
-            - MYSQL_DATABASE=square
+            - POSTGRES_PASSWORD=secret
+            - POSTGRES_DB=square
         ports: 
-            - 3306:3306
+            - 5432:5432
     admin:
         image: adminer
         container_name: square_admin
         restart: always
         links: 
             - db
-        environment:
-            - MYSQL_ROOT_PASSWORD=secret
         ports:
             - 8080:8080
         depends_on:
