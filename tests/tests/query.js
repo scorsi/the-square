@@ -14,7 +14,6 @@ function user(callback) {
     if (err) {
       console.log(err.stack)
     } else {
-      console.log(res.rows)
       callback(res.rows)
     }
   })
@@ -80,6 +79,16 @@ function office_company(callback) {
   })
 }
 
+function user_hobby(callback) {
+  pool.query('SELECT name, first_name, last_name, birth_date, zip_code, password, email FROM user_hobby, hobby, "user" where user_hobby.user_id = "user".user_id and user_hobby.hobby_id = hobby.hobby_id', (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
 module.exports = {
   user: user,
   company: company,
@@ -87,5 +96,6 @@ module.exports = {
   company_activitydomain: company_activitydomain,
   hobby: hobby,
   office: office,
-  office_company: office_company
+  office_company: office_company,
+  user_hobby: user_hobby
 }
