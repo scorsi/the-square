@@ -1,5 +1,4 @@
 const { company } = require('./query');
-var md5 = require('md5');
 
  test('Select data from company', done => {
    function callback(data) {

@@ -10,7 +10,7 @@ const pool = new Pool({
 
 
 function user(callback) {
-  pool.query("SELECT * FROM user", (err, res) => {
+  pool.query('SELECT * FROM "user"', (err, res) => {
     if (err) {
       console.log(err.stack)
     } else {
