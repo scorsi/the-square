@@ -1,0 +1,15 @@
+{
+  "name": "Tests",
+  "version": "1.0.0",
+  "description": "Unit tests for theSquare project with jest",
+  "scripts": {
+    "test": "jest ./tests/"
+  },
+  "author": "Jasmin SAIPI",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^23.3.0",
+    "pg": "7.9.0",
+    "md5": "2.2.1"
+  }
+}
