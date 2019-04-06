@@ -81,3 +81,17 @@ VALUES ((SELECT company_id FROM company WHERE name = 'Adfinitas'),
         ((SELECT activitydomain.activity_id FROM activitydomain WHERE name = 'Web Development'))),
        ((SELECT company_id FROM company WHERE name = 'Adfinitas'),
         ((SELECT activitydomain.activity_id FROM activitydomain WHERE name = 'Marketing')));
+
+--- SKILLS
+
+INSERT INTO skill (name)
+VALUES ('Java'),
+       ('Spring'),
+       ('Angular'),
+       ('Python');
+       
+INSERT INTO user_skill (skill_id, user_id)
+VALUES (1,1),
+       (3,2),
+       (4,2),
+       (2,1);

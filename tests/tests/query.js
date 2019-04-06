@@ -80,7 +80,37 @@ function office_company(callback) {
 }
 
 function user_hobby(callback) {
-  pool.query('SELECT name, first_name, last_name, birth_date, zip_code, password, email FROM user_hobby, hobby, "user" where user_hobby.user_id = "user".user_id and user_hobby.hobby_id = hobby.hobby_id', (err, res) => {
+  pool.query('SELECT name FROM user_hobby, hobby, "user" where user_hobby.user_id = "user".user_id and user_hobby.hobby_id = hobby.hobby_id and "user".user_id = 1', (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
+function skill(callback) {
+  pool.query("SELECT * FROM skill", (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
+function user_skill(callback) {
+  pool.query('SELECT name FROM user_skill, skill, "user" WHERE user_skill.user_id = "user".user_id and skill.skill_id = user_skill.skill_id and "user".user_id = 1', (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
+function user_office(callback) {
+  pool.query('SELECT address FROM user_office, "user", office WHERE user_office.office_id = office.office_id and user_office.user_id = "user".user_id and "user".user_id = 1', (err, res) => {
     if (err) {
       console.log(err.stack)
     } else {
@@ -97,5 +127,8 @@ module.exports = {
   hobby: hobby,
   office: office,
   office_company: office_company,
-  user_hobby: user_hobby
+  user_hobby: user_hobby,
+  skill: skill,
+  user_skill: user_skill,
+  user_office: user_office
 }
