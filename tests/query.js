@@ -2,7 +2,7 @@ const { Pool } = require('pg')
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
+  host: '172.21.0.2',
   database: 'square',
   password: 'secret',
   port: 5432,
@@ -119,6 +119,26 @@ function user_office(callback) {
   })
 }
 
+function formation(callback) {
+  pool.query("SELECT * FROM formation", (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
+function formation_activitydomain(callback) {
+  pool.query('SELECT school_name, title, start_year, end_year, formation.description as fomration_description, activitydomain.description as activity_description, name FROM formation_activitydomain, formation, activitydomain WHERE formation_activitydomain.formation_id = formation.formation_id and formation_activitydomain.activity_id = activitydomain.activity_id', (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      callback(res.rows)
+    }
+  })
+}
+
 module.exports = {
   user: user,
   company: company,
@@ -130,5 +150,7 @@ module.exports = {
   user_hobby: user_hobby,
   skill: skill,
   user_skill: user_skill,
-  user_office: user_office
+  user_office: user_office,
+  formation: formation,
+  formation_activitydomain: formation_activitydomain
 }
