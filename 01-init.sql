@@ -55,7 +55,8 @@ CREATE TABLE public.Formation
     end_year     INT2          NOT NULL,
     description  VARCHAR(2000) NOT NULL,
     user_id      INT           NOT NULL,
-    CONSTRAINT Formation_PK PRIMARY KEY (formation_id)
+    CONSTRAINT Formation_PK PRIMARY KEY (formation_id),
+    CONSTRAINT Formation_User_FK FOREIGN KEY (user_id) REFERENCES public.User (user_id)
 ) WITHOUT OIDS;
 
 
@@ -75,12 +76,12 @@ CREATE TABLE public.Skill
 ------------------------------------------------------------
 CREATE TABLE public.JobProposition
 (
-    job_id       SERIAL        NOT NULL,
-    name         VARCHAR(255)  NOT NULL,
-    description  VARCHAR(2000) NOT NULL,
-    gross_salary FLOAT,
-    company_id   INT           NOT NULL,
-    CONSTRAINT JobProposition_PK PRIMARY KEY (job_id),
+    jobproposition_id SERIAL        NOT NULL,
+    name              VARCHAR(255)  NOT NULL,
+    description       VARCHAR(2000) NOT NULL,
+    gross_salary      FLOAT,
+    company_id        INT           NOT NULL,
+    CONSTRAINT JobProposition_PK PRIMARY KEY (jobproposition_id),
     CONSTRAINT JobProposition_Company_FK FOREIGN KEY (company_id) REFERENCES public.Company (company_id)
 ) WITHOUT OIDS;
 
@@ -142,10 +143,10 @@ CREATE TABLE public.User_ActivityDomain
 ------------------------------------------------------------
 CREATE TABLE public.JobProposition_ActivityDomain
 (
-    job_id      INT NOT NULL,
-    activity_id INT NOT NULL,
-    CONSTRAINT JobProposition_ActivityDomain_PK PRIMARY KEY (job_id, activity_id),
-    CONSTRAINT JobProposition_ActivityDomain_JobProposition_FK FOREIGN KEY (job_id) REFERENCES public.JobProposition (job_id),
+    jobproposition_id INT NOT NULL,
+    activity_id       INT NOT NULL,
+    CONSTRAINT JobProposition_ActivityDomain_PK PRIMARY KEY (jobproposition_id, activity_id),
+    CONSTRAINT JobProposition_ActivityDomain_JobProposition_FK FOREIGN KEY (jobproposition_id) REFERENCES public.JobProposition (jobproposition_id),
     CONSTRAINT JobProposition_ActivityDomain_ActivityDomain0_FK FOREIGN KEY (activity_id) REFERENCES public.ActivityDomain (activity_id)
 ) WITHOUT OIDS;
 
@@ -177,19 +178,6 @@ CREATE TABLE public.Formation_ActivityDomain
 
 
 ------------------------------------------------------------
--- Table: User_Formation
-------------------------------------------------------------
-CREATE TABLE public.User_Formation
-(
-    user_id      INT NOT NULL,
-    formation_id INT NOT NULL,
-    CONSTRAINT User_Formation_PK PRIMARY KEY (user_id, formation_id),
-    CONSTRAINT User_Formation_User_FK FOREIGN KEY (user_id) REFERENCES public.User (user_id),
-    CONSTRAINT User_Formation_Formation0_FK FOREIGN KEY (formation_id) REFERENCES public.Formation (formation_id)
-) WITHOUT OIDS;
-
-
-------------------------------------------------------------
 -- Table: User_Skill
 ------------------------------------------------------------
 CREATE TABLE public.User_Skill
@@ -207,10 +195,10 @@ CREATE TABLE public.User_Skill
 ------------------------------------------------------------
 CREATE TABLE public.JobProposition_Skill
 (
-    job_id   INT NOT NULL,
-    skill_id INT NOT NULL,
-    CONSTRAINT JobProposition_Skill_PK PRIMARY KEY (job_id, skill_id),
-    CONSTRAINT JobProposition_Skill_JobProposition_FK FOREIGN KEY (job_id) REFERENCES public.JobProposition (job_id),
+    jobproposition_id INT NOT NULL,
+    skill_id          INT NOT NULL,
+    CONSTRAINT JobProposition_Skill_PK PRIMARY KEY (jobproposition_id, skill_id),
+    CONSTRAINT JobProposition_Skill_JobProposition_FK FOREIGN KEY (jobproposition_id) REFERENCES public.JobProposition (jobproposition_id),
     CONSTRAINT JobProposition_Skill_Skill0_FK FOREIGN KEY (skill_id) REFERENCES public.Skill (skill_id)
 ) WITHOUT OIDS;
 
