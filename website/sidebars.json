@@ -1,10 +1,6 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
-  },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "Tables": ["user", "company", "office", "formation", "hobby", "skill", "activity_domain"],
+    "Getting Started": ["intro", "tables"]
   }
 }
